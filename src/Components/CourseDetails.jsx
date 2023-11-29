@@ -1,21 +1,71 @@
-import { Modal } from "flowbite-react";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
-
-
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom"
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import SyllabusModal from "./Modal";
+import Swal from "sweetalert2";
 
 const CourseDetails = () => {
+    const { user } = useContext(AuthContext)
     const [openModal, setOpenModal] = useState(false);
     const [course, setCourse] = useState([]);
     const { name, instructor, description, enrollmentStatus, thumbnail, duration, schedule, location, prerequisites, syllabus } = course;
     const { id } = useParams();
+    const navigate = useNavigate();
+
+
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:3000/course-details/${id}`)
+            fetch(`https://course-server-i521ybuke-apurbomondal85.vercel.app/course-details/${id}`)
                 .then(res => res.json())
                 .then(data => setCourse(data))
         }
     }, [])
+
+    const handleEnroll = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be Enroll this Course",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes Enrolled"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const currentDate = new Date();
+                const dueDate = new Date(currentDate.getTime() + getMillisecondsFromDuration(duration));
+                const enrollCourse = { userName: user?.displayName, email: user?.email, courseName: name, instructor, thumbnail, dueDate: dueDate.toDateString(), completeCourse: 0 }
+
+                if (user?.email) {
+                    fetch("https://course-server-i521ybuke-apurbomondal85.vercel.app/enroll-course", {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(enrollCourse)
+                    }).then(res => res.json()).then(data => {
+                        if (data.acknowledged) {
+                            Swal.fire({
+                                title: "Success",
+                                text: "Your Enroll Course has been Added.",
+                                icon: "success"
+                            });
+                        }
+                    })
+                }else{
+                    navigate("/login")
+                }
+            }
+        });
+
+    }
+
+    // Function to convert duration to milliseconds
+    function getMillisecondsFromDuration(duration) {
+        const weeks = parseInt(duration);
+        return weeks * 7 * 24 * 60 * 60 * 1000; // Convert weeks to milliseconds
+    }
+
     return (
         <div>
             <div className='w-full h-[400px] bg-[#125c46] flex items-center'>
@@ -38,24 +88,14 @@ const CourseDetails = () => {
                         <p className="text-gray-400 mt-2"><span className="font-bold text-gray-200">Schedule : </span>{schedule}</p>
                         <p className="text-gray-400 mt-2"><span className="font-bold text-gray-200">Location : </span>{location}</p>
                         <p className="text-gray-400 mt-2"><span className="font-bold text-gray-200">Prerequisites : </span><span>{prerequisites?.map((item, index) => <span className="ml-1" key={index}>{item}.</span>)}</span></p>
-                        <button onClick={() => setOpenModal(true)} className="text-sm font-medium text-white py-1 px-3 mt-2 rounded-md bg-[#301b8f]">See Syllabus</button>
+                        <div className="flex items-center justify-between">
+                            <button onClick={() => setOpenModal(true)} className="text-sm font-medium text-white py-1 px-3 mt-2 rounded-md bg-[#301b8f]">See Syllabus</button>
+                            <button onClick={handleEnroll} className="text-sm font-medium text-white py-2 px-4 mt-2 rounded-md bg-[#8b1b8f]">Enroll Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <Modal show={openModal} onClose={() => setOpenModal(false)}>
-                <Modal.Header>{name}</Modal.Header>
-                <Modal.Body>
-                    <div className="space-y-3">
-                        {
-                            syllabus?.map(({week,topic,content}, index) => <div className="p-4 bg-[#091525] text-white rounded-lg">
-                                <p>Week : <span className="text-gray-400">{week}</span></p>
-                                <p>Topic : <span className="text-gray-400">{topic}</span></p>
-                                <p>Content : <span className="text-gray-400">{content}</span></p>
-                            </div>)
-                        }
-                    </div>
-                </Modal.Body>
-            </Modal>
+            <SyllabusModal openModal={openModal} setOpenModal={setOpenModal} syllabus={syllabus} name={name} />
         </div>
     )
 }

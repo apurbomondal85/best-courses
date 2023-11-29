@@ -7,7 +7,7 @@ const CoursesSection = ({ searchValue }) => {
     const [courses, setCourses] = useState(null);
     const [moreData, setMoreData] = useState(false);
     useEffect(() => {
-        fetch("http://localhost:3000/courses")
+        fetch("https://course-server-i521ybuke-apurbomondal85.vercel.app/courses")
             .then(res => res.json())
             .then(data => {
                 setCourses(data)
