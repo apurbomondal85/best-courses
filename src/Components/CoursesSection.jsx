@@ -14,7 +14,7 @@ const CoursesSection = ({ searchValue }) => {
                 if (searchValue && courses) {
                     const filteredCourses = data.filter((course) => course.name.toLowerCase().includes(searchValue.toLowerCase()) || course.instructor.toLowerCase().includes(searchValue.toLowerCase()));
                     filteredCourses ? setCourses(filteredCourses) : setCourses(data)
-                }
+                }else{setCourses(data)}
             })
     }, [searchValue])
 

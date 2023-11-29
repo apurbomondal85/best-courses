@@ -16,9 +16,9 @@ const StudentEnrolled = () => {
     }, [user])
 
     return (
-        <div className='md:px-16'>
+        <div className='px-6 md:px-16'>
             <h1 className='text-center text-2xl md:text-3xl lg:text-4xl font-semibold text-[#6a2277]'>Student Enrolled Courses</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 lg:mt-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 py-4 mt-6 lg:mt-12">
                 {
                     enrollCourses?.map(enrollCourse => <EnrollCourseCard key={enrollCourse._id} enrollCourse={enrollCourse}/>)
                 }

@@ -50,8 +50,8 @@ const Login = () => {
             <div className="bg-[#07332F] p-24 basis-[50%] h-full">
                 <img src="https://doc-house-cc82c.web.app/assets/login-9d56cc31.png" alt="login image" className='h-[300px] lg:h-[500px] w-full' />
             </div>
-            <div className=" basis-[50%] flex justify-center items-center bg-slate-200">
-                <div className="p-8 w-2/3 rounded-lg shadow border bg-white border-blue-300">
+            <div className=" basis-[50%] flex justify-center items-center bg-slate-200 mt-16">
+                <div className="p-8 lg:w-2/3 rounded-lg shadow border bg-white border-blue-300">
                     <h1 className='text-center text-3xl font-semibold mb-10'>Sign in</h1>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-6">
