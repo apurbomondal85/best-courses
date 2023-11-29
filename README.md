@@ -10,7 +10,7 @@ Follow these steps to run the Best Course React project locally:
 
    ```bash
    git clone https://github.com/apurbomondal85/best-courses.git
-   cd best-course
+   cd best-courses
 2. **npm install**
 3. **npm run dev**
 
