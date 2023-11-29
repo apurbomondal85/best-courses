@@ -16,7 +16,7 @@ Follow these steps to run the Best Course React project locally:
 
 ## Features
 
-**Student Dashboard:** First Login this side then Navigate to the dashboard to get an overview of your courses.
+**Student Dashboard:** First Login this site then Navigate to the dashboard to get an overview of your courses.
 
 **Courses List:** Navigate to the Courses to get courses list.
 
