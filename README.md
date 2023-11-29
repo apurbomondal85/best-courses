@@ -1,8 +1,23 @@
-# React + Vite
+# Best Course React Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Best Course React project! This project features a student dashboard, a list of courses, and a detailed page for each course.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Follow these steps to run the Best Course React project locally:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/apurbomondal85/best-courses.git
+   cd best-course
+2. **npm install**
+3. **npm run dev**
+
+## Features
+
+**Student Dashboard:** Navigate to the dashboard to get an overview of your courses.
+
+**Courses List:** Navigate to the Courses to get courses list.
+
+**Course Detail Page:** Click on a course to view detailed information about that specific course.
