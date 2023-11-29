@@ -26,4 +26,4 @@ Follow these steps to run the Best Course React project locally:
 
 Check out the demo video to see the Best Course React project in action:
 
-[![Watch Demo Video]](https://drive.google.com/file/d/18ftdTq5wkA0GTsGpRL1bQASsUwi7ZqgX/view?usp=drive_link)https://drive.google.com/file/d/18ftdTq5wkA0GTsGpRL1bQASsUwi7ZqgX/view?usp=drive_link)
+[![Watch Demo Video]](https://drive.google.com/file/d/18ftdTq5wkA0GTsGpRL1bQASsUwi7ZqgX/view?usp=drive_link)
